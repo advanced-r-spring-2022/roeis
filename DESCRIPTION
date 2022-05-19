@@ -1,0 +1,35 @@
+Package: roeis
+Title: The Roeis Package Allows Users to Interact With the 
+    On-line Encyclopedia of Integer Sequences
+Version: 0.0.0.9000
+Authors@R: 
+    c(person("Martin", "Ferreiro", , "mf3303a@american.edu", role = c("aut", "cre")),
+    person("David", "Leschiner", , "david@american.edu", role = c("aut")),
+    person(given = "David", 
+           family = "Gerard", 
+           role = c("ctb"), 
+           email = "gerard.1787@gmail.com",
+           comment = c(ORCID = "0000-0001-9450-5023")))
+Description: This package includes a number of functions
+    to find the name of a sequence, to retreive it and to plot it. 
+    It also provides easy access to the information posted on the oeis website 
+    and allows users to create audio instances out of sequences.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.2
+Imports: 
+    R.cache,
+    stringr,
+    rvest,
+    data.table,
+    tibble,
+    tuneR
+Suggests: 
+    rmarkdown,
+    knitr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
+VignetteBuilder: knitr
+Depends: 
+    R (>= 2.10)

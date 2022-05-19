@@ -1,0 +1,99 @@
+---
+title: "oeis-package-vignette"
+output: rmarkdown::html_vignette
+author : "David Leshchiner and Martin de Ferreiro"
+vignette: >
+  %\VignetteIndexEntry{oeis-vignette}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(roeis)
+```
+
+# Motivation
+
+The On-line Encyclopedia of Integer Sequences (OEIS) is a repository of thousands of mathematical integer sequences that includes their elements, their formula, a brief description, relevant sources, and further reading.This package downloads and caches the data for users to explore through R. Furthermore, this package offers users a method to interact with the website itself, and convert selected sequences into an audio file. By making this package, we hope to make the OEIS website and integer sequences more accessible for exploration for those interested in the subject.\
+
+# Overview
+
+To use this package load it into the R session using the `library()` call or `::` operator.\
+```{r}
+library(roeis)
+```
+
+## Downloading and viewing the OEIS data
+
+If using this package for the first time in an R session, the `oeis_cache()` function downloads the data set of integer sequences included in the OEIS and stores it in your computer's cache memory for easy and rapid access. Running `oeis_cache()` is needed for other functions in the package to be able to work. If users want to view the data, they can run `oeis_load()`.\
+
+### Examples
+
+This code downloads the data and saves it in the cache memory.\
+
+```{r}
+oeis_cache()
+```
+
+This code returns the first six sequences in the data set with their corresponding id name.\
+```{r}
+head(oeis_load())
+```
+
+## Finding and retrieving OEIS sequences
+
+The `oeis_finder()` function helps users search for any given sequence. Users input the first few numbers of the desired sequence and the function returns all possible matching sequences with their id name.\
+
+Once users know the id name of the sequence they are interested in, they can use `oeis_retrieve()` to get the full sequence as a vector of integers.\
+
+### Examples
+
+We search for the Fibonacci sequence. The code below will return all sequences that start with "0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55".\ 
+```{r}
+oeis_finder(c(0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55))
+```
+
+The`oeis_retrieve()` function allows us to retrieve the Fibonacci sequence as integers\
+```{r}
+oeis_retrieve("A000045")
+```
+
+## Visualizing numeric sequences
+
+The `oeis_plot()` and `oeis_plot2()` functions allow users to plot sequences from the oeis data set based on their id names. The former allows users to plot a single numeric sequence while the latter allows users to plot two numeric sequences. Both functions have an argument n, that allows users to select how many elements of the sequences should be plotted.\
+
+### Examples
+
+This example plots the "[fly straight dammit](https://youtu.be/pAMgUB51XZA)" sequence
+```{r}
+oeis_plot("A005132")
+```
+
+This example graphs the Bablylonian spiral
+```{r}
+oeis_plot2("A297346", "A297347")
+```
+
+## Opening and Parsing OEIS web data
+
+The `oeis_browse()` and `oeis_download_webpage()` functions allow users to open the OEIS webpage on a sequence and download the information from the webpage into R.\
+
+## Examples
+
+The `oeis_browse()` function allows users to open up the OEIS browser page of the sequence they select
+```{r, eval = FALSE}
+oeis_browse("A005132")
+```
+
+The `oeis_download_webpage()` function allows user to download the entirety of an oeis_webpage result. Users can also select from a few key sections and only have information from those sections
+```{r, eval = FALSE}
+head(oeis_download_webpage("A005132", "links"))
+oeis_download_webpage("A005132", "formula")
+```
